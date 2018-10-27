@@ -1,4 +1,5 @@
 # SASUGA-BOT-SAMA Meme Generator for Discord Bots
+###### powered on glitch.com
 
 
 Usage:
