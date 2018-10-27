@@ -15,9 +15,12 @@
 <body>
   
   <center><h1><img src="http://i.imgur.com/NjkX8Hp.png" width="100"></img>SASUGA BOT-SAMA<img src="http://i.imgur.com/0dOEVpf.png" width="80"></img></h1></center>
+
   <br>
+
 	<center><canvas id="canvas" width="680" height="200"></canvas></center>
-	 <script>
+
+	<script>
      
      $.urlParam = function(name){
 	    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -27,22 +30,28 @@
 	      window.onload = function() {
 
 
-	      		var picture = $.urlParam('picture');
-	      		var username = $.urlParam('username');
+	      var picture = $.urlParam('picture');
+	      var username = decodeURI($.urlParam('username'));
+        var deepfry = $.urlParam('deepfry');
+        
+        console.log("Name: " + username + " | Picture: " + picture + " | Deepfry: " + deepfry);
+          
+        if (picture == "null") picture = "https://cdn.glitch.com/48172e68-2ade-44c8-a3e6-558e7b90b4f0%2Fimportant.png?1540636040558";
+          
 
 
-	          var canvas = document.getElementById("canvas");
-	          var context = canvas.getContext("2d");
+	      var canvas = document.getElementById("canvas");
+	      var context = canvas.getContext("2d");
 
 
-	          	context.beginPath();
+	      context.beginPath();
 				context.rect(0, 0, 1000, 1000);
 				context.fillStyle = "white";
 				context.fill();
 
 
 				base_image = new Image();
-  				base_image.src = picture;
+  			base_image.src = picture;
           
           
   				base_image.onload = function(){
@@ -51,17 +60,26 @@
 
   				context.font = "30px Arial";
   				context.fillStyle = "black";
-				context.fillText("sasuga " + username + "-sama", 235,100);
-
-	          // no argument defaults to image/png; image/jpeg, etc also work on some
-	          // implementations -- image/png is the only one that must be supported per spec.
+				  context.fillText("sasuga " + username + "-sama", 235,100);
+                      
+          if (deepfry == "true") context.filter = 'contrast(100)';
 	          var dataUrl = canvas.toDataURL();
         }
+        
+        console.log("Meme created...");
+        
+        
 	      
-	 </script>
+	</script>
+
+  <img id="pic" src="" class="profilepic" width="0"></img>
 
   <center><h2>made by Pat in <s>fucking PHP</s> jquery</h2></center>
-<center><h4>Usage: https://sasuga-bot-sama.glitch.me/?username=text&picture=link</h4></center>
+  <center><h4>Usage: https://sasuga-bot-sama.glitch.me/?username=entername&picture=enterlinkhere&deepfry=trueorfalse</h4></center>
+
+  <script>
+    document.getElementById("pic").src=decodeURI($.urlParam('picture'));
+  </script>
   
 </body>
 </html>
